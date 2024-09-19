@@ -14,7 +14,8 @@ const jwt = require('jsonwebtoken')
 const fs = require('fs');
 const path = require('path');
 const { isAuth,SanitizedUser, cookieExtractor } = require("./services/common");
-const stripe = require("stripe")('sk_test_51ML7kYSAD0rysEGcvdfSwXTv0Th0TNQHozNWgKG7mrQZdfujZpg5PvFMyI4HBNBRIiABIs1HVzAm6i50HnVq3Mot00Iyg5NPda');
+const stripe = require("stripe")(process.env.SECRET_KEY)
+
 
 const privateKey = fs.readFileSync(path.resolve(__dirname, './private.key'), 'utf-8');
 const publicKey = fs.readFileSync(path.resolve(__dirname, './public.key'), 'utf-8');
