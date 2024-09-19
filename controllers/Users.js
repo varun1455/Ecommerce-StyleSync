@@ -22,12 +22,12 @@ exports.fetchUsers = async (req, res) =>{
 
   exports.fetchUserById = async (req, res) =>{
 
-    const {id} = req.params;
+    const {id} = req.user;
   
     try {
   
-      const response = await User.findById(id, 'name email id').exec();
-      res.status(200).json(response);
+      const user = await User.findById(id).exec();
+      res.status(200).json({id:user.id, email:user.email, name:user.name, addresses:user.addresses });
       
     } catch (error) {
       res.status(400).json(error);
@@ -40,12 +40,12 @@ exports.fetchUsers = async (req, res) =>{
   
 exports.updateUser = async (req, res) =>{
 
-    const {id} = req.params;
+    const {id} = req.user;
   
     try {
   
-      const response = await User.findByIdAndUpdate(id, req.body, {new:true})
-      res.status(200).json(response);
+      const user = await User.findByIdAndUpdate(id, req.body, {new:true})
+      res.status(201).json({ email:user.email, name:user.name, addresses:user.addresses });
       
     } catch (error) {
       res.status(400).json(error);

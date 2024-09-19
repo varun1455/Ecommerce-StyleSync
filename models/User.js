@@ -4,11 +4,12 @@ const { Schema } = mongoose;
 const UserSchema = new mongoose.Schema(
     {
         email : {type : String, required: true, unique:true},
-        password : { type: String, required: true},
+        password : { type: Buffer, required: true},
         name:{type : String},
         role:{type:String, required:true , default:'user'},
-        addresses: { type: [Schema.Types.Mixed] }
+        addresses: { type: [Schema.Types.Mixed] },
         // orders: { type: [Schema.Types.Mixed] }
+        salt: Buffer
     
        
     },
